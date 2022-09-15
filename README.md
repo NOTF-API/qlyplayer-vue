@@ -5,6 +5,10 @@
 基于Vue3+TypeScript+Vite,
 从[NOTF-API/QLYAudioPlayer](https://github.com/NOTF-API/QLYAudioPlayer)移植而来
 
+## 版权问题
+注:项目内 音乐/歌词/封面 仅可用于学习用途，如有侵权，请联系删除。
+禁止用于商用用途，若商用，请自行购买音乐版权
+
 ## 项目安装与依赖
 
 ```sh

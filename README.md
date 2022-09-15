@@ -5,7 +5,7 @@
 基于Vue3+TypeScript+Vite,
 从[NOTF-API/QLYAudioPlayer](https://github.com/NOTF-API/QLYAudioPlayer)移植而来
 
-DEMO:[在线体验](http://player.notf.top:5000/)
+DEMO:[在线体验](http://101.43.163.155:5000/)
 
 ## 版权问题
 注:项目内 音乐/歌词/封面 仅可用于学习用途，如有侵权，请联系删除。

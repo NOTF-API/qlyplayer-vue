@@ -18,5 +18,25 @@
         "lyricSrc": "/upload/lrc/4MINUTE - 살만찌고.lrc",
         "coverSrc": "/upload/cover/4MINUTE - 살만찌고.jpg",
         "themeColor": "#89381f"
+    },
+    {
+        "title": "I Really Like You",
+        "description": "",
+        "artist": "Carly Rae Jepsen",
+        "album": "I Really Like You",
+        "audioSrc": "/upload/audio/I Really Like You.m4a",
+        "lyricSrc": "/upload/lrc/I Really Like You.lrc",
+        "coverSrc": "/upload/cover/I Really Like You.jpg",
+        "themeColor": "#89381f"
+    },
+    {
+        "title": "More Sun",
+        "description": "",
+        "artist": "Ihaksi",
+        "album": "More Sun",
+        "audioSrc": "/upload/audio/More Sun.m4a",
+        "lyricSrc": "",
+        "coverSrc": "/upload/cover/More Sun.jpg",
+        "themeColor": "#89381f"
     }
 ]

@@ -5,6 +5,8 @@
 基于Vue3+TypeScript+Vite,
 从[NOTF-API/QLYAudioPlayer](https://github.com/NOTF-API/QLYAudioPlayer)移植而来
 
+![](https://repository-images.githubusercontent.com/536921314/9dd39653-b538-4315-800f-7b5cc37030f2)
+
 DEMO:[在线体验](http://101.43.163.155:5000/)
 
 ## 版权问题

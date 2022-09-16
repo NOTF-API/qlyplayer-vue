@@ -10,7 +10,9 @@ import "@/assets/main.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faCompress,
+  faEllipsisV,
   faExpand,
+  faHeart,
   faList,
   faListOl,
   faPause,
@@ -18,10 +20,17 @@ import {
   faRandom,
   faRecycle,
   faSpinner,
+  faDownload,
   faStepBackward,
   faStepForward,
   faWarning,
 } from "@fortawesome/free-solid-svg-icons";
+
+import {
+  faHeart as faHeartRegular,
+  faCommentDots,
+} from "@fortawesome/free-regular-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faExpand);
@@ -36,6 +45,11 @@ library.add(faPause);
 library.add(faPlay);
 library.add(faWarning);
 library.add(faSpinner);
+library.add(faHeart);
+library.add(faHeartRegular);
+library.add(faDownload);
+library.add(faCommentDots);
+library.add(faEllipsisV);
 
 const app = createApp(App);
 

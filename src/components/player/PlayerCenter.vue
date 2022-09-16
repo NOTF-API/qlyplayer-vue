@@ -14,6 +14,20 @@
         </div>
       </div>
     </div>
+    <div class="user-ops">
+      <button
+        @click="
+          initLikeAnimate = false;
+          like = !like;
+        "
+        :class="[like ? 'like' : 'unlike', initLikeAnimate ? '' : 'animate']"
+      >
+        <font-awesome-icon :icon="[like ? 'fas' : 'far', 'heart']" />
+      </button>
+      <button><font-awesome-icon icon="download" /></button>
+      <button><font-awesome-icon :icon="['far', 'comment-dots']" /></button>
+      <button><font-awesome-icon icon="ellipsis-v" /></button>
+    </div>
     <div class="lyric-container" v-show="status.openLyric">
       <div id="lyric" class="lyric overflow">
         {{ lyric.text }}
@@ -26,6 +40,9 @@
 import { usePlayerStore } from "@/stores/player";
 import stylusImage from "@/assets/image/stylus.png";
 import diskEdgeImage from "@/assets/image/disk-edge.png";
+import { ref } from "vue";
+const like = ref(false);
+const initLikeAnimate = ref(true);
 const { appearance, status, source, lyric } = usePlayerStore();
 </script>
 
@@ -146,6 +163,54 @@ const { appearance, status, source, lyric } = usePlayerStore();
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 7;
+}
+
+.user-ops {
+  padding: 0 1rem;
+  position: absolute;
+  left: 0;
+  bottom: 5.375rem;
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-ops > button {
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.5rem;
+  margin: 0 1rem;
+  cursor: pointer;
+  background: none;
+  color: #bbbbbb;
+  border: none;
+  outline: none;
+}
+
+@keyframes like {
+  50% {
+    transform: scale(1.5);
+  }
+}
+@keyframes unlike {
+  50% {
+    transform: scale(1.5);
+  }
+}
+
+.user-ops > button.animate.unlike {
+  animation: unlike 0.4s linear;
+}
+
+.user-ops > button.animate.like {
+  color: rgb(228, 43, 43);
+  animation: like 0.4s linear;
+}
+
+.user-ops > button:hover {
+  color: #ffffff;
 }
 
 .lyric-container {

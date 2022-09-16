@@ -11,7 +11,7 @@
     ></div>
     <div class="main-buttons">
       <button class="lite" @click="mode.changeMode">
-        <font-awesome-icon :icon="mode.current.icon" />
+        <font-awesome-icon :icon="mode.list[mode.currentIndex].icon" />
       </button>
       <button @click="actions.previous">
         <font-awesome-icon icon="step-backward" />
@@ -22,15 +22,14 @@
       <button @click="actions.next">
         <font-awesome-icon icon="step-forward" />
       </button>
-      <button class="lite" @click="status.openLyric = !status.openLyric">
-        词
-      </button>
+      <button class="lite" @click="handleLyricToggle">词</button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { usePlayerStore } from "@/stores/player";
+import { set } from "@/utils/localStorage";
 import { computed } from "vue";
 const { status, actions, mode } = usePlayerStore();
 const computeProgressStyle = computed(() => {
@@ -41,6 +40,11 @@ const computeProgressStyle = computed(() => {
 
 const handleProgressChange = (e: MouseEvent) => {
   actions.progress(e.clientX / window.innerWidth);
+};
+
+const handleLyricToggle = () => {
+  status.openLyric = !status.openLyric;
+  set("openLyric", status.openLyric);
 };
 </script>
 
@@ -115,6 +119,7 @@ const handleProgressChange = (e: MouseEvent) => {
   width: 2rem;
   height: 3rem;
   background: none;
+  user-select: none;
 }
 
 .main-buttons button:hover {

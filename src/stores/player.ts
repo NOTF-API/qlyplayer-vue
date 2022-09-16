@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import type { Music } from "./types";
 import { format } from "@/utils/time";
 import { getList } from "@/api/music";
+import * as storage from "@/utils/localStorage";
 import {
   loop as loopMode,
   order as orderMode,
@@ -13,20 +14,28 @@ import { lyric as Lyric } from "@/utils/lyric";
 export const usePlayerStore = defineStore("player", () => {
   const animateCallback = () => {
     if (audio.currentTime == audio.duration && audio.ended) {
-      actions.switch(mode.current.onEnd(status.index, list.length));
+      actions.switch(
+        mode.list[mode.currentIndex].onEnd(status.index, list.length)
+      );
       return;
     }
     const curr = audio.currentTime;
     const duration = audio.duration;
-    appearance.diskDegree += 0.1;
     status.currentText = format(curr);
     status.durationText = format(duration);
-    lyric.trigger(curr);
     status.progress = (audio.currentTime / audio.duration) * 100;
+    if (audio.paused) {
+      return;
+    }
+    appearance.diskDegree += 0.1;
+    lyric.trigger(curr);
   };
   const beginAnimate = () => {
-    animateCallback();
-    animate = requestAnimationFrame(beginAnimate);
+    function animationLoop() {
+      animate = requestAnimationFrame(animationLoop);
+      animateCallback();
+    }
+    animationLoop();
   };
   const cancleAnimate = () => {
     cancelAnimationFrame(animate);
@@ -66,10 +75,14 @@ export const usePlayerStore = defineStore("player", () => {
       status.isPlaying = false;
     },
     async next() {
-      await this.switch(mode.current.next(status.index, list.length));
+      await this.switch(
+        mode.list[mode.currentIndex].next(status.index, list.length)
+      );
     },
     async previous() {
-      await this.switch(mode.current.previous(status.index, list.length));
+      await this.switch(
+        mode.list[mode.currentIndex].previous(status.index, list.length)
+      );
     },
     // toggle from play/pause
     toggle() {
@@ -105,23 +118,24 @@ export const usePlayerStore = defineStore("player", () => {
     progress: 0,
     currentText: "00:00.00",
     durationText: "00:00.00",
-    openLyric: true,
+    openLyric: storage.getBoolean("openLyric"),
     openSpectrum: false,
   });
 
   const list: Array<Music> = reactive([]);
 
   const mode = {
-    list: [loopMode, orderMode, randomMode],
-    current: orderMode,
+    list: [orderMode, loopMode, randomMode],
+    currentIndex: (() => {
+      return storage.getInteger("mode.currentIndex");
+    })(),
     changeMode() {
-      let curr = this.list.findIndex((item) => item === this.current);
-      if (curr + 1 === this.list.length) {
-        curr = 0;
+      if (this.currentIndex + 1 === this.list.length) {
+        this.currentIndex = 0;
       } else {
-        curr++;
+        this.currentIndex++;
       }
-      this.current = this.list[curr];
+      storage.set("mode.currentIndex", this.currentIndex);
     },
   };
 

@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="user-ops">
+    <!-- <div class="user-ops">
       <button
         @click="
           initLikeAnimate = false;
@@ -27,7 +27,7 @@
       <button><font-awesome-icon icon="download" /></button>
       <button><font-awesome-icon :icon="['far', 'comment-dots']" /></button>
       <button><font-awesome-icon icon="ellipsis-v" /></button>
-    </div>
+    </div> -->
     <div class="lyric-container" v-show="status.openLyric">
       <div id="lyric" class="lyric overflow">
         {{ lyric.text }}
@@ -40,9 +40,9 @@
 import { usePlayerStore } from "@/stores/player";
 import stylusImage from "@/assets/image/stylus.png";
 import diskEdgeImage from "@/assets/image/disk-edge.png";
-import { ref } from "vue";
-const like = ref(false);
-const initLikeAnimate = ref(true);
+// import { ref } from "vue";
+// const like = ref(false);
+// const initLikeAnimate = ref(true);
 const { appearance, status, source, lyric } = usePlayerStore();
 </script>
 

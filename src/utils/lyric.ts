@@ -25,7 +25,12 @@ const lyric: Lyric = {
     this.timeline = [];
     this.pointer = -1;
     this.text.value = "";
-    if (!url) {
+    if (url === null) {
+      this.timeline.push({ time: 0, lyric: "暂无歌词" });
+      return;
+    }
+    if (url === "") {
+      this.timeline.push({ time: 0, lyric: "纯音乐，请欣赏" });
       return;
     }
     const data = await getLyric(url);
